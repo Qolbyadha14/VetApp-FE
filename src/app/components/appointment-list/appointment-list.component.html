@@ -1,1 +1,53 @@
-<p>appointment-list works!</p>
+<mat-card>
+  <mat-card-title>Search Appointments</mat-card-title>
+  <mat-card-content>
+    <form (submit)="fetchAppointments()">
+      <mat-form-field>
+        <input matInput [matDatepicker]="datePicker" placeholder="Date" [(ngModel)]="search.date" name="date">
+        <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+        <mat-datepicker #datePicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Pet Name" [(ngModel)]="search.petName" name="petName">
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit">Search</button>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<mat-card>
+  <mat-card-title>Appointments</mat-card-title>
+  <mat-card-content>
+    <mat-table [dataSource]="appointments">
+      <ng-container matColumnDef="index">
+        <mat-header-cell *matHeaderCellDef>No</mat-header-cell>
+        <mat-cell *matCellDef="let appointment; let i = index">{{ i + 1 }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="dateTime">
+        <mat-header-cell *matHeaderCellDef>Date/Time</mat-header-cell>
+        <mat-cell *matCellDef="let appointment">{{ appointment.dateTime | date:'medium' }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="petName">
+        <mat-header-cell *matHeaderCellDef>Pet Name</mat-header-cell>
+        <mat-cell *matCellDef="let appointment">{{ appointment.pet.name }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="ownerName">
+        <mat-header-cell *matHeaderCellDef>Owner's Name</mat-header-cell>
+        <mat-cell *matCellDef="let appointment">{{ appointment.pet.ownerName }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="contactDetails">
+        <mat-header-cell *matHeaderCellDef>Contact Details</mat-header-cell>
+        <mat-cell *matCellDef="let appointment">{{ appointment.pet.preferredContactDetails }}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="['index', 'dateTime', 'petName', 'ownerName', 'contactDetails']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['index', 'dateTime', 'petName', 'ownerName', 'contactDetails']"></mat-row>
+    </mat-table>
+  </mat-card-content>
+</mat-card>
