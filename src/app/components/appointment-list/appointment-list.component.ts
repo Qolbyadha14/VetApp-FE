@@ -20,7 +20,6 @@ export class AppointmentListComponent implements OnInit {
 
   fetchAppointments(): void {
     this.appointmentService.getAppointments(this.search).subscribe((appointments: any) => {
-      console.log(appointments.data);
       this.appointments = appointments.data;
       this.isLoading = false;
 

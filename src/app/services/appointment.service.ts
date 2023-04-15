@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../environments/environment';
+
 
 export interface Appointment {
   id: number;
@@ -23,7 +25,7 @@ export interface AppointmentSearch {
 })
 export class AppointmentService {
 
-  private apiUrl = 'http://199.192.20.224:5002/Appointment';
+  private apiUrl = environment.apiUrl + '/Appointment';
 
   constructor(private http: HttpClient) {}
 
