@@ -9,6 +9,8 @@ import { Appointment, AppointmentSearch, AppointmentService } from 'src/app/serv
 export class AppointmentListComponent implements OnInit {
   appointments: Appointment[] = [];
   search: AppointmentSearch = {};
+  isLoading = false;
+
 
   constructor(private appointmentService: AppointmentService) {}
 
@@ -20,6 +22,8 @@ export class AppointmentListComponent implements OnInit {
     this.appointmentService.getAppointments(this.search).subscribe((appointments: any) => {
       console.log(appointments.data);
       this.appointments = appointments.data;
+      this.isLoading = false;
+
     });
   }
 }
