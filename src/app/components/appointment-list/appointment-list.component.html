@@ -31,7 +31,7 @@
       <mat-table [dataSource]="appointments" class="col-12">
         <ng-container matColumnDef="index">
           <mat-header-cell *matHeaderCellDef class="col-1">No</mat-header-cell>
-          <mat-cell *matCellDef="let appointment; let i = index" class="col-1">{{ i + 1 }}</mat-cell>
+          <mat-cell *matCellDef="let appointment; let i = index" class="col-1">{{ getRowNumber(i) }}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="dateTime">
@@ -63,3 +63,12 @@
     </div>
   </mat-card-content>
 </mat-card>
+
+<mat-paginator *ngIf="dataSource && dataSource.total_record"
+               [length]="dataSource.total_record"
+               [pageIndex]="dataSource.page_number - 1"
+               [pageSize]="dataSource.page_size"
+               [pageSizeOptions]="[5, 10, 25, 100]"
+               (page)="onPageChange($event)">
+</mat-paginator>
+
